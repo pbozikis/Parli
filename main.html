@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css" />
+        <title>Parli</title>
+        <link rel="icon" href="/static/frog.png">
+    </head>
+    <body>
+        <<header>>
+        <span class="tophat">
+            <button type="button" onclick="document.location = '/u/login'">Login</button>
+            <button type="button" onclick="document.location = '/u/register'">Register</button>
+        </span>
+        <div class="cheese">
+            <h1>Parli</h1>
+            <h2>Learn <span class="typewriter">Fluent</span></h2>
+            <h2 id="lang"></h2>
+        </div>
+        <div class="btnony">
+            <button type="button" onclick="window.location = '/learn'">Start Learning</button>
+        </div>
+        <div class="divi"></div>
+        <div class="bback">
+            <h2>Learn <c>any</c> language <br><br> &emsp; &emsp; from <c>any</c> language</h2>
+            <br>
+            <br>
+            <p>
+                Parli is a free, open source language learning app that was created because I wanted to learn languages that
+                either were not on good quality free learning apps or had limited support. Parli offers support for
+                any language on Google Translate, as Google Translate is used to teach. So instead of handcrafted lessons
+                you will get procedually generated lessons that are customisable to your learning needs. You're not forced
+                to learn characters of a different language if you don't want. You can jump straight into building your comprehension
+                and learn enough to converse. Another limitation of more popular language apps is that they usually have
+                very limited support for non-english-speaking learners to learn a language from their own language.
+                But as Parli uses Google Translate as a backend, this problem is no more. Now, anyone can learn any language...
+                from any language.<br><br>
+                That being said, Parli does not pretend to be one of the more popular language apps. It will never have
+                the same quality as their lessons. It exists as a way to gain some conversational experience in any given language
+                with focus on accessibility.
+            </p>
+        </div>
+    </body>
+    <script>
+        const words = "<<languages>>".split(",");
+        const cheese = document.querySelector(".typewriter");
+        // fetch("/learn").then(x => x.text()).then(res => document.getElementById('lang').innerHTML = res);
+        function typeWriter(word)
+        {
+            let i = 0;
+            cheese.innerHTML = "";
+            let id = setInterval(() => {
+                if(i >= word.length)
+                {
+                    clearInterval(id);
+                    deleteChar();
+                } else {
+                    cheese.innerHTML += word[i++];
+                }
+            }, 250);
+        }
+
+        function deleteChar()
+        {
+            let word = cheese.innerHTML;
+            let i = word.length -1;
+            let id = setInterval(() => {
+                if(i >= 0)
+                {
+                    cheese.innerHTML = cheese.innerHTML.substring(0, cheese.innerHTML.length - 1);
+                    i--;
+                } else {
+                    clearInterval(id);
+                    let rand = Math.floor(Math.random() * words.length);
+                    typeWriter(words[rand]);
+                }
+            }, 150)
+        }
+        typeWriter(words[Math.floor(Math.random() * words.length)]);
+
+    </script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #FECD45;/*#45d4ff; */
+        }
+
+        .tophat
+        {
+            display: inline-block;
+            width: 95%;
+            padding:20px;
+            text-align: right;
+        }
+        h1{
+            font-size: 50px;
+            font-family: 'Pacifico';
+        }
+
+        .cheese
+        {
+            margin-top: 20%;
+            margin-bottom: 10%;
+        }
+        
+        .typewriter
+        {
+            padding: 0;
+            padding-right: 4px;
+            border-right: 2px solid black;
+            animation: blink 0.75s infinite;
+        }
+
+        button
+        {
+            background-color: transparent;
+            padding: 10px 20px;
+            border-style: none;
+            border: 2px solid black;
+        }
+
+        button:hover
+        {
+            transition: background-color 0.5s ease-in, color 0.5s ease-in;
+            background-color: black;
+            color: #FECD45;
+            cursor: pointer;
+        }
+        
+        .divi{
+            background-image: url("/static/tree.png");
+            height: 500px;
+            margin: 0;
+            padding: 0px;    
+        }
+        .bback
+        {
+            background-color: rgb(8, 8, 8);
+            color:#FECD45;
+            padding: 80px;
+        }
+        .bback p{
+            color: white;
+            text-align: left;
+        }
+        c{
+            color:aquamarine;
+        }
+
+        @keyframes blink {
+            from{
+                border: none;
+            }
+            to{
+                border-color: 2px solid black;
+            }
+            
+        }
+    </style>
+</html>

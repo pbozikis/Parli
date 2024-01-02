@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <title>Parli</title>
+        <link rel="icon" href="/static/frog.png">
+    </head>
+    <body>
+        <div id="progressTracker">
+            <div id="completed">
+                <img src="/static/frog.png">
+                <h2>Lesson Complete!</h2>
+                <button onclick="document.location='/learn/<<lang>>'">Continue</button>
+            </div>
+        </div>
+        <a href="/learn/<<lang>>"><img src="/static/back.png" id="back"></a>
+        <h2 id="instruction">Translate the Phrase</h2>
+        <button id="btnplay" type="button" class="sound" onclick="play()"><i class='fa fa-volume-up'></i></button>
+        <h3 id="translation">Translated text</h3>
+        <div class="phon">
+            <h3 id="phonetics">Pronunciation</h3>
+            <button onclick="togglePhon()">-</button>
+        </div>
+        <br>
+        <input type="search" id="input">
+        <br>
+        <div>
+            <span id="wordbank">
+
+            </span>
+            <button type="button" onclick="toggleWordbank()">-</button>
+        </div>
+        <button id="check" type="button">Check</button>
+        <div class="btmBar" id="btmBar">
+            <h2>Incorrect!</h2>
+        </div>
+        <style>
+            body{
+                background-color: #FECD45;
+                font-family: sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                overflow-y: hidden;
+            }
+            .btmBar
+            {
+                position: absolute;
+                bottom: 0;
+                background-color: red;
+                height: 0px;
+                width: 100%;
+                text-align: left;
+                overflow-x: hidden;
+                transition: all 1s;
+            }
+            .btmBar h2
+            {
+                margin: 20px;
+                font-size: 40px;
+            }
+            #progressTracker
+            {
+                height: 10px;
+                background-color: green;
+                width: 0%;
+                transition: width 1s ease-out, height 2s ease-in-out;
+            }
+            #completed
+            {
+                opacity: 0;
+                transition: all 2s ease-in;
+                position: absolute;
+                top:45%;
+                left:43%;
+            }
+            #completed img{
+                width: 100px;
+                height: 100px;
+            }
+
+            #input
+            {
+                background-color: transparent;
+                border-style: none;
+                border-bottom: 2px solid black;
+                margin-bottom: 20px;
+                width: 20%;
+                font-size: 20px;
+            }:focus
+            {
+                outline: none;
+            }
+
+
+
+            #wordbank {
+                margin-bottom: 2%;
+            }
+            #wordbank button
+            {
+                background-color: transparent;
+            }
+            #wordbank button:hover
+            {
+                background-color: green;
+            }
+            button
+            {
+                background-color: aquamarine;
+                border-radius: 20px;
+                padding: 5px 10px;
+                margin: 5px;
+            }
+            button:hover{
+                cursor: pointer;
+                background-color: green;
+            }
+            #back
+            {
+                border: none;
+                position: absolute;
+                float: left;
+                left:5%;
+                width: 50px;
+                height: 50px;
+                border-radius: 30px;
+            }
+            #back:hover
+            {
+                cursor: pointer;
+                background-color: green;
+            }
+
+            /* .phon
+            {
+                display: inline-block;
+                text-align: center;
+            } */
+
+        </style>
+        <script>
+            function shuffle(array) {
+                let curId = array.length;
+                // There remain elements to shuffle
+                while (0 !== curId) {
+                    // Pick a remaining element
+                    let randId = Math.floor(Math.random() * curId);
+                    curId -= 1;
+                    // Swap it with the current element.
+                    [array[curId], array[randId]] = [array[randId], array[curId]];
+                }
+                return array;
+            }
+
+            function togglePhon()
+            {
+                const phon = document.getElementById("phonetics");
+                phon.style.display = phon.style.display === "none" ? "initial" : "none";
+            }
+
+            function toggleWordbank()
+            {
+                let rat = document.getElementById('wordbank');
+                rat.style.display = rat.style.display === "none" ? "initial" : "none"; 
+            }
+
+            const unique = (value, index, self) => self.indexOf(value) === index;
+            const purge = text => encodeURI(text.normalize("NFD")).replace(/%../g, '')
+            const addWord = word => document.getElementById('input').value += word + " ";
+
+            function makeWordBank(answer, words)
+            {
+                const wb = document.getElementById("wordbank");
+                let rat = words.join(' ').split(' ');
+                let _ants = answer.split(' ');
+                for(let i = 0; i < 5; i++){
+                    let rand = Math.floor(Math.random() * rat.length);
+                    if(!_ants.includes(rat[rand]))
+                        _ants.push(rat[rand]);
+                }
+                for(let word of shuffle(_ants))
+                {
+                    let btn = document.createElement('button');
+                    btn.setAttribute('onclick', `addWord("${word}")`);
+                    btn.innerHTML = word;
+                    wb.appendChild(btn);
+                }
+            }
+ 
+            function cmp(input, correct, pref)
+            {
+                const _input = input.toLowerCase().replace(/[\s\?]/g, '');
+                const _correct= correct.toLowerCase().replace(/[\s\?]/g, '');
+                console.log(_input, _correct);
+                if(pref === "translated")
+                {
+                    return(_input === _correct);
+                } else{
+                    return(purge(_input) === purge(_correct));
+                }
+            }
+
+
+            function * questionGenerator(questions)
+            {
+                let index = 0;
+                // updateAudio(questions[index].translated);
+                console.log(questions);
+                let preferred = "<<preferred>>";
+                while(index < questions.length)
+                {
+                    //GENERATE
+                    let source = undefined;
+                    let target = undefined;
+                    let pron = undefined;
+                    let words = undefined;
+                    updateAudio(questions[index].translated).then(() => {if(questions[index].type === "aud") audio.play();});
+                    document.getElementById("translation").innerHTML = "";
+                    document.getElementById("phonetics").innerHTML = "";
+                    document.getElementById("progressTracker").style.width = `${(index+1)/questions.length*100}%`;
+                    document.getElementById("wordbank").innerHTML = "";
+
+                    if(questions[index].type === "t2s")
+                    {
+                        target = questions[index].original;
+                        source = questions[index].translated;
+                        pron = questions[index].pronunciation;
+                        words = questions.map(x => x.original);
+                        makeWordBank(target, words);
+
+                        document.getElementById("translation").innerHTML = source;
+                        document.getElementById("phonetics").innerHTML = pron || "";
+                    }
+                    else if(questions[index].type === "s2t")
+                    {
+                        target = questions[index][preferred] || questions[index].translated; //or translated
+                        source = questions[index].original;
+                        // pron = unde//questions[index].pronunciation;
+                        words = questions.map(x => x[preferred] || x.translated); //or translated
+                        makeWordBank(target, words);
+
+                        document.getElementById("translation").innerHTML = source;
+                        document.getElementById("phonetics").innerHTML = pron || "";
+
+                    } else if(questions[index].type === "aud")
+                    {
+                        target = questions[index].original;
+                        source = "";
+                        console.log(target);
+                    }
+
+                    yield;             
+
+                    //CHECK
+                    if(cmp(document.getElementById('input').value, target, preferred))
+                    {
+                        index++;
+                        ding.play().catch(console.log);
+                        document.getElementById("btmBar").style.height = "0px";
+                        document.getElementById("input").value = "";
+                    }else{
+                        inco.play().catch(console.log);
+                        document.getElementById("btmBar").style.height = "100px";
+                    }
+                }
+                document.getElementById("progressTracker").style.height = "100vh";
+                document.getElementById("completed").style.opacity = "100%";
+                win.play().catch(console.log);
+            }
+
+            let audio = undefined;
+            const ding = new Audio("/static/ding.mp3");
+            const win  = new Audio("/static/win.mp3");
+            const inco = new Audio("/static/incorrect.mp3");
+            const play = () => audio.play().catch(console.log);
+            const updateAudio = text => fetch(`/updateAudio?text=${text.replace('?', '')}&lang=<<lang>>`).then(d => audio = new Audio('/static/temp.mp3'));
+            
+            let nextQuestion = undefined;
+
+            fetch("/generateLesson?lid=<<lid>>&lang=<<lang>>&cookie="+document.cookie).then(res => res.json()).then(data => {
+                nextQuestion = questionGenerator(data);
+                document.getElementById('check').addEventListener('click', nextQuestion.next.bind(nextQuestion));
+                nextQuestion.next();
+            });
+
+            document.addEventListener('keydown', event => {
+
+                switch(event.keyCode)
+                {
+                    case 13: 
+                        nextQuestion.next();
+                        break;
+                    case 27:
+                        break;
+                    default:
+                        document.getElementById("input").focus();
+                        break;
+                }
+            })
+
+        </script>
+    </body>
+</html>

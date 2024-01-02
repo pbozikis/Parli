@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css" />
+        <title>Parli</title>
+        <link rel="icon" href="/static/frog.png">
+    </head>
+    <body>
+        <div style="text-align: center;">
+        <a href="/" style="font-size: 50px; text-decoration: none; color: black; font-family: Pacifico">Parli</a>
+        </div>
+        <input id="search" type="text" placeholder="Search..." oninput="typing()">
+        <div class="container" id="container">
+            
+        </div>
+        <style>
+            body{
+                background-color: #FECD45;
+                font-family: sans-serif;
+            }
+
+            .container
+            {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: 10%;
+                margin-left: 10%;
+                align-content: left;
+            }
+
+            .card{
+                margin: 20px;
+                text-align: center;
+                flex: 1 0 20%;
+                border: 2px solid black;
+                border-radius: 20px;
+                padding:5px;
+                background-color: #FECD45;
+                color:black;
+                max-width: 240px;
+                max-height: 150px;
+
+            }
+
+            .card img
+            {
+                width: 50%;
+                height: 50%;    
+                border-radius: 20px;       
+            }
+
+            .clickable
+            {
+                width: fit-content;
+            
+            }
+            .clickable:hover
+            {
+                cursor: pointer;
+
+            }
+            .card:hover
+            {
+                transition: all 1s ease-out;
+                cursor: pointer;
+                background-color: #fe7145;
+                /* color: #FECD45; */
+            }
+
+            #search
+            {
+                border-style: none;
+                background-color: transparent;
+                border-bottom: 2px solid black;
+                width: 80%;
+                color: black;
+                font-size: x-large;
+                text-decoration: none;
+                margin-left: 10%;
+                margin-right: 10%;
+            }::placeholder
+            {
+                color: darkslategrey;
+            }
+
+            input:focus{
+                outline: none;
+            }
+
+            /* html{
+                scroll-behavior: smooth;
+            } */
+        </style>
+
+        <script>
+            const languages = "<<languages>>".split(",");
+            const langs = "<<langs>>".split(",");
+            document.addEventListener("keydown", (event)=>{
+                document.getElementById("search").focus();
+            })
+            
+            function typing()
+            {
+                // container.style.display = "none";\\//innerHTML = "";
+                const q = document.getElementById("search").value;
+                for(let i = 0; i < languages.length; i++)
+                    document.getElementById(langs[i]).style.display = 
+                    (q == "" || languages[i].toLowerCase().includes(q.toLowerCase())) ? "initial" : "none";
+            }
+
+            function createCards()
+            {
+                let container = document.getElementById("container");
+                for(let i = 0; i < languages.length; i++)
+                {
+                    let element = document.createElement("div");
+                    element.className = "card";
+                    element.id = langs[i];
+                    element.onclick = () => document.location = `/learn/${langs[i]}`;
+                    const h = document.createElement("h2");
+                    const img = document.createElement("img");
+                    img.src = `/static/flags/${langs[i]}.png`;
+                    h.innerText = languages[i];
+                    element.appendChild(h);
+                    element.appendChild(img);
+                    container.appendChild(element);
+                }
+            }
+            createCards();
+
+        </script>
+    </body>
+</html>

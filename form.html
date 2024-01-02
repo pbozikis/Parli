@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Parli</title>
+    </head>
+    <body>
+        <div class="form">
+        <!-- <form action="/u/<<action>>" method="POST"> -->
+            <h2><<action>></h2>
+            <input id="uname" name="user" type="text" placeholder="Username">
+            <input id="pass" name="pass" type="password" placeholder="Password">
+            <!-- <input type="submit" value="<<action>>"> -->
+            <button type="button" onclick="submit()"><<action>></button>
+        </div>
+        </form>
+        <style>
+            body{
+                margin: 0;
+                background-color: #FECD45;
+                text-align: center;
+            }
+        </style>
+
+        <script>
+            function submit()
+            {
+                const user = document.getElementById("uname").value;
+                const pass = document.getElementById("pass").value;
+                const options = {
+                        method: "POST",
+                        body: JSON.stringify({user: user, pass: pass}),
+                        headers: {
+                            'Content-Type' : "application/json"
+                        }
+                    }
+                fetch(`/u/${"<<action>>".toLowerCase()}`, options)
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.status === "Success")
+                        {
+                            document.cookie = `token=${data.token};domain=;path=/`;//;expires`;
+                            console.log("Cheese: " + document.cookie);
+                            document.location = "/learn";
+                        }
+                    });
+            }
+        </script>
+    </body>
+</html>

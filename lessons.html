@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Parli</title>
+        <link rel="icon" href="/static/frog.png">
+    </head>
+    <body>
+        <a href="/learn"><img src="/static/back.png" id="back"></a>
+        <img src="/static/cog.png" onclick="settings()" id="settings">
+        <h1><<language>></h1>
+        <div class="lessons">
+            <<lessons>>
+        </div>
+        <style>
+            h1{
+                font-size: 40px;
+            }
+            body{
+                background-color: #FECD45;
+                font-family: sans-serif;
+                text-align: center;
+            }
+            .lessons
+            {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 5%;
+            }
+            .lesson
+            {
+                background-color: black;
+                color:#FECD45;
+                padding: 40px;
+                margin: 0.5%;
+                border: 2px solid black;
+                height: 120px;
+                width: 120px;
+                font-size: 20px;
+            }
+
+            .lesson:hover
+            {
+                transition: all 0.5s ease-in;
+                cursor: pointer;
+                color:black;
+                background-color:#FECD45;
+            }
+            #settings
+            {
+                width: 50px;
+                height: 50px;
+                float: right;
+                position:absolute;    
+                left: 95%;
+                transition: all 0.5s ease-in-out;
+            }
+            #settings:hover{
+                cursor: pointer;
+                transform: rotate(45deg);
+            }
+            #back
+            {
+                border: none;
+                position: absolute;
+                float: left;
+                left:5%;
+                width: 50px;
+                height: 50px;
+                border-radius: 30px;
+            }
+            #back:hover
+            {
+                cursor: pointer;
+                background-color: green;
+            }
+        </style>
+        <script>
+
+            function settings()
+            {
+
+            }
+        </script>
+    </body>
+</html>

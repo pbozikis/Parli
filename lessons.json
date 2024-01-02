@@ -1,0 +1,49 @@
+{
+    "Basics":{
+        "Simple":["A man", "A woman", "A boy", "A girl", "The man", "The woman", "The boy", "The girl"],
+        "Medium":["I am a man", "You are a woman", "I am a woman", "You are a man", "I am a boy", "You are a boy",
+        "I am a girl", "You are a girl"],
+        "Complex":["He is a man", "He is a boy", "She is a woman", "She is a girl", "The man and the woman", "The boy and the girl",
+        "The girl and the boy", "The woman and the girl", "The man and the girl"]        
+    },
+    "Food 1":{
+        "Simple":["Apple", "Water", "I eat", "You eat", "He eats", "She eats", "I drink", "You drink",
+        "He drinks", "She drinks"],
+        "Medium":["The girl eats", "The boy eats", "The man eats", "The woman eats",
+        "The girl drinks", "The boy drinks", "The man drinks", "The woman drinks",
+        "I eat apples", "You eat apples", "I drink water", "You drink water", "He drinks water", "She drinks water",
+        "He eats apples", "She eats apples"],
+        "Complex":["The girl eats apples", "The man eats apples", "The boy eats apples", "The woman eats apples",
+        "The girl drinks water", "The man drinks water", "The woman drinks water", "The boy drinks water",
+        "The man and the woman drink water", "The girl and the boy eat apples", "I eat apples and the woman drinks water"]
+    },
+    "Stuff":{
+        "Simple":["Hello", "Thank you", "You're welcome", "Bread", "The boy has apples", "The girl has apples",
+        "You have apples", "I have water"],
+        "Medium":["Good morning", "Good evening", "Pablo eats bread", "I have bread", "The woman has bread", "You have bread",
+        "The man has bread", "He has bread", "The boy has bread"],
+        "Complex":["Thank you, I have apples", "The man has bread and apples", "The man eats apples"]
+    },
+    "Phrases 1":{
+        "Simple":["Yes", "No", "I'm sorry", "Hi", "Please", "How are you?", "I am well"],
+        "Medium":["Yes please", "No thank you", "No, I'm sorry", "The girl is well", "The boy is well","The man is well", "The woman is well",
+        "He is well", "She is well", "The boy is sorry", "He is sorry", "She is sorry", "The girl is sorry", "The woman is sorry",
+        "The man is sorry", "How is the man?", "How is the woman?", "How is the boy?", "How is the girl?"],
+        "Complex":["Is the boy well", "Is the girl well", "Is the man well?", "Is the woman well?", "Is he well?", "Is she well?",
+        "I am well, thank you", "Yes please, I eat apples", "No thanks, I have water"]
+    },
+    "Family 1":{
+        "Simple":["Mother", "Father", "Mum", "Dad", "Sister", "Brother", "Grandma", "Grandpa"],
+        "Medium":["I am your father", "I am your brother", "I am your sister", "I am your mother", "I am your grandma", "I am your grandpa",
+        "You are my father", "You are my mother", "You are my sister", "You are my brother","You are my grandma", "You are my grandpa",
+        "I have a brother", "I have a sister", "I have a mother", "I have a father", "I have a grandma", "I have a grandpa"],
+        "Complex":["My father is well, thank you", "Thank you, my mother is well", "My grandma is well", "My grandpa is well", "Yes, my sister is well", "My brother is well",
+        "How is your mother?", "How is your sister?", "Is your father well?", "Is your brother well?", "How is your grandpa?"]
+    },
+    "Activities":{
+        "Simple":["Walk", "I want bread", "You want bread", "The man wants water", "She wants an apple", "He wants an apple", "I walk", "You walk", "She walks", "The girl walks", "The man walks", "The woman walks", "The boy walks"],
+        "Medium":["I want to eat", "I want to drink", "I want to walk", "The man wants to eat", "The woman wants to eat", "The boy wants to eat", "The girl wants to eat", "The man wants to drink", "The woman wants to drink", "The boy wants to drink",
+        "The girl wants to drink","Your brother walks", "Your sister walks"],
+        "Complex":["I want to eat bread", "Do you want to eat?", "The man wants to eat apples", "The woman wants to drink water", "Your grandpa is drinking water"]
+    }
+} 

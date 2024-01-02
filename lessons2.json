@@ -1,0 +1,66 @@
+{
+    "person":[{"word":"man", "gender":"m", "level":0}, {"word":"woman", "gender":"f", "level":0},
+    {"word":"girl", "gender":"f", "level":0}, {"word":"boy", "gender":"m", "level":0}],
+
+    "food":[{"word":"bread", "a": false, "level":1}, {"word":"beef"}, {"word":"lamb"}, {"word":"chicken"}, {"word":"cheese"}, {"word":"fish"}, {"word":"salad"}],
+    "drink":[{"word":"water"}, {"word":"milk"}, {"word":"wine"}, {"word":"juice"}, {"word":"coffee"}, {"word": "tea"}],
+    
+    "relative":[{"word":"mother", "gender":"f"}, {"word":"father", "gender":"m"}, {"word":"sister", "gender":"f"},
+    {"word":"brother", "gender":"m"}, {"word":"grandma", "gender":"f"}, {"word":"grandpa", "gender":"m"}, {"word":"son", "gender":"m"},
+    {"word":"daughter", "gender":"f"}, {"word":"wife", "gender":"f"}, {"word":"husband", "gender":"m"}, {"word":"uncle", "gender":"m"}, {"word":"aunt", "gender":"f"}, {"word":"cousin", "gender":"m"}],
+    
+    "activity":[{"word":"talk", "past":"talked", "pres":"talking"}, {"word":"dine", "pres": "dining", "past":"dined"}, {"word":"walk", "past":"walked", "pres":"walking"},{"word":"swim", "past":"swam", "pres":"swimming"}, {"word":"read", "past":"read", "pres":"reading"}],
+    "adjective":[{"word":"happy", "gender":"mf"}, {"word":"skinny", "gender":"mf"}, {"word":"tall", "gender":"mf"}, {"word":"fat", "gender":"mf"}, {"word":"pretty", "gender":"f"}, {"word":"handsome", "gender":"m"}],
+
+    "object":[{"word":"car"}, {"word":"shirt"}, {"word":"dress"}, {"word":"ticket"}],
+    "place":[{"word":"hotel"},{"word":"hospital"}, {"word":"bathroom"}, {"word":"church"}, {"word":"restaurant"}, {"word": "airport"}, {"word":"market"}, {"word":"train station"}, {"word":"bus stop"}],
+
+    "Lessons":
+    {   
+        "Basics":{
+            "basic":["The <person>", "Yes", "No", "A <person>"],
+            "medium":["You are a <person>", "I am a <person>", "Thank you"],
+            "complex":["He is a <person:gender=m>", "She is a <person:gender=f>", "The <person> and the <person>", "Yes, I am a <person>", "No, you are not a <person>"]
+        },
+        "Food":{
+            "basic":["<food>", "<drink>", "I (eat|drink)", "You (eat|drink)", "The <person> (eats|drinks)", "(He|She) (eats|drinks)"],
+            "medium":["The <person> eats <food>", "The <person> drinks <drink>", "I eat <food>", "I drink <drink>", "(He|She) eats <food>", "(He|She) drinks <drink>", "You eat <food>", "You drink <drink>"],
+            "complex":["(No, I do not|Yes, I) eat <food>", "(No, I do not|Yes, I) drink <drink>", "(He|She) (eats|does not eat) <food>", "The <person> eats <food>"]
+        },
+        "Ownership":{
+            "basic":["(I|You) have <(food|drink)>", "(He|She) has <(food|drink)>", "The <person> has <(food|drink)>"],
+            "medium":["(My|His|Her|Your) <(food|drink)> (is|is not) delicious", "The <person>'s <(food|drink)> (is|is not) delicious"],
+            "complex":["Do you have my <food>?", "I have your <drink>", "(My|Your|His|Her) <food> is delicious, (my|your|his|her) <food> is not delicious"]
+        },
+        "Family":{
+            "basic":["Love", "(I|You) have a <relative>", "<relative>", "He has a <relative:gender=f>", "She has a <relative:gender=m>"],
+            "medium":["I am your <relative>", "You are my <relative>", "I love my <relative>"],
+            "complex":["The <person:gender=m> is my <relative:gender=m>", "The <person:gender=f> is my <relative:gender=f>"]
+        },
+        "Infinitives":{
+            "basic":["(I|You) walk", "(I want|He wants|She wants|The <person> wants) <(food|drink)>", "(He|She|The <person>) walks", "(He|She) wants to (eat|drink)", "The <person> wants to (eat|drink)", "(I|You) want to (eat|drink)",
+        "(I|You) like to (eat|drink)", "(He|She) likes to (eat|drink)", "The <person> likes to (eat|drink)"],
+        "medium":["Do you like to (walk|eat|drink)?", "I want to eat <food>", "I like to eat <food>", "(The <person>|He|She) (likes|wants) to (eat <food>|drink <drink>)"],
+        "complex":["My <relative> (likes|wants) to (walk|eat|drink)", "The <person:gender=m>'s <relative:gender=f> (likes|wants) to (walk|eat|drink)", "The <person:gender=f>'s <relative:gender=m> (likes|wants) to (walk|eat|drink)"]
+        },
+        "Places":{
+            "basic":["Here", "There", "<place>", "(He|She) goes", "The <person> goes", "Where are you?", "Where is (he|she)?", "Where is the <person>?"],
+            "medium":["I am at the <place>", "The <person> is at the <place>", "(He|She) is at the <place>", "(I|You) go to the <place>", "(I am|You are) here", "(I am|You are) there", "The <person> is (here|there)", "Where is the <place>?", "The <person> goes to the <place>", "(He|She) goes to the <place>"],
+            "complex":["My <relative> is at the <place>", "I like the <place>", "I want to go to the <place>", "The <person> does not want to go to the <place>", "The <place> is not here"]
+        },
+        "Activities":
+        {
+            "basic":["Car", "I am <activity.pres>", "(He|She) is <activity.pres>", "The <person> is <activity.pres>"],
+            "medium":["(I am|You are|He is|She is|The <person> is) reading a book", "(I am|You are|He is|She is|The <person> is) watching a movie", "(I am|You are|He is|She is|The <person> is) going on a date",
+        "(I am|You are|He is|She is|The <person> is) <activity.pres>", "(I am|You are|He is|She is|The <person> is) buying a car"],
+            "complex":["(I am|You are|He is|She is|The <person> is) <activity.pres> with (me|you|her|him|the <person>)"]
+        },
+        "Objects":
+        {
+            "basic":["<object>", "(I|You) buy a <object>", "(He|She) buys a <object>", "The <person> buys a object",
+            "(I|You) have a <object>", "(He|She) has a <object>", "The <person> has a <object>"],
+            "medium":["(My|Your|Her|His|The <person>'s) <object> is red", "I like my <object>", "I have two <object>s"],
+            "complex":["I buy the <object> because I need it"]
+        }
+    }
+}
